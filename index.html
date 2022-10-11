@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <div>
-        <h1>This is the title of the page</h1>
-        <h2>This is the subtitle of the page</h2>
-    </div>
+    <header onclick="makeItClickable(event)">
+        <div>
+            <h1>This is the title of the page</h1>
+            <h2 id="subtittle">This is the subtitle of the page</h2>
+        </div>
+    </header>
 
     <div>
         <hr />
@@ -42,7 +44,7 @@
 
     <div>
         <p>And this text is just for the exercise too!</p>
-        <h2 style="color: red">
+        <h2 style="color: red" onclick="changeFooterText(event)" id="footer">
             Save this page on your computer and open it with VSCode to get the
             questions!
         </h2>
@@ -53,14 +55,15 @@
         */
 
         const changeTitle = function (newTitle) {
-            document.querySelector('div>h1').innerHTML = 'Welcome to Epicode';
+            const newtittle = document.querySelector('h1');
+            newtittle.innerText = newTitle;
         }
 
         /* EXERCISE 2
          Write a function for changing the class of the title of the page in "myHeading".
         */
         const addClassToTitle = function () {
-            let changeClass = document.querySelector("div");
+            let changeClass = document.querySelector("h1");
             changeClass.classList.add("myHeading");
         };
 
@@ -69,7 +72,7 @@
         */
 
         const changePcontent = function () {
-            document.querySelector('div>p').innerHTML = 'This is getting more serious'
+            document.querySelectorAll('div>p').innerHTML = 'This is getting more serious'
         };
 
         /* EXERCISE 4
@@ -85,10 +88,9 @@
         */
 
         const addToTheSecond = function (content) {
-            const newList = document.createElement('li')
-            newList.innerHTML = 'new list created';
-            document.getElementById('secondList').appendChild(newList)
-
+            const newList = document.createElement('li');
+            newList.innerHTML = content;
+            document.getElementById('secondList').appendChild(newList);
         };
 
         /* EXERCISE 6
@@ -96,15 +98,16 @@
         */
         const addParagraph = function (content) {
             const createP = document.createElement('p');
-            createP.innerHTML = 'upperclass student'
-            document.querySelector('body > div').appendChild(createP)
+            createP.innerHTML = content
+            document.querySelector('div').appendChild(createP)
         };
 
         /* EXERCISE 7
          Write a function for making the first unordered list disappear.*/
 
         const firstUlDisappear = function () {
-            document.getElementById("firstList").style.visibility = "hidden";
+            const nodeDisappear = document.getElementById("firstList")
+            nodeDisappear.style.visibility = "hidden";
         };
 
         /* EXERCISE 8
@@ -112,35 +115,59 @@
         */
 
         const paintItGreen = function () {
-            document.getElementById('secondList').style.color = 'green'
+            const ulNodes = document.getElementsByTagName('ul')
+            for (let i = 0; i < ulNodes.length; i++) {
+                ulNodes[i].style.backgroundColor = "green";
+            }
         };
 
         /* EXERCISE 9
          Make the heading of the page change color every time the user clicks on it.
         */
 
-        const makeItClickable = function () {
-            //
+        const makeItClickable = function (event) {
+            const color = getRandomColor();
+            document.querySelector("header").style.backgroundColor = color;
         };
 
+        function getRandomColor() {
+            const yellow = Math.floor(Math.random() * 255);
+            const gray = Math.floor(Math.random() * 255);
+            const coral = Math.floor(Math.random() * 255);
+
+            return "rgb(" + yellow + ", " + gray + ", " + coral + ")";
+        }
         /* EXERCISE 10
          Change the footer text with something else when the user clicks on it.
         */
 
-        const changeFooterText = function () {
-            //
+        const changeFooterText = function (event) {
+            let text = getRandomText();
+            document.getElementById("footer").innerText = text;
         };
+        function getRandomText() {
+            let changeNumber = Math.floor(Math.random() * 10);
+            return 'ilovemywife' + changeNumber;
+        }
 
         /* EXERCISE 11
          Attach an event listener to the input field in the page that changes the text of the page's subtitle
         */
 
         const inputField = document.getElementById("input-field");
-        // ...
+        const subby = document.getElementById("subtitle");
 
-        window.onload = function () {
-            //
-        };
+        inputField.addEventListener("input", (e) => {
+            subby.innerHTML = e.target.value;
+        })
+        /* EXERCISE 12
+     set welcome alert message when page is reloaded 
+    */
+        function pageAlert() {
+            window.onload = function () {
+                alert(" page succesfully loaded ");
+            };
+        }
 
         /* EXERCISE 13
          Use HTML5 tags to properly provide semantic meaning to the different portions of the page.
