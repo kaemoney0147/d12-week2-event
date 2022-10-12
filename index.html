@@ -80,7 +80,9 @@
         */
 
         const changeUrls = function () {
-            document.querySelector("a").href = 'https://www.google.com'
+            let newLink = document.querySelector("a");
+            newLink.href = 'https://www.google.com';
+            newLink.innerText = 'this site visit google'
         };
 
         /* EXERCISE 5
